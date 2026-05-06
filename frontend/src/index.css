@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-background text-text-primary font-sans antialiased overflow-x-hidden;
+    background-color: theme('colors.background');
+  }
+  
+  ::selection {
+    @apply bg-primary-100 text-primary-900;
+  }
+
+  ::-webkit-scrollbar {
+    @apply w-[6px] h-[6px];
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-borderHighlight/50 rounded-full hover:bg-borderHighlight transition-colors;
+  }
+  
+  /* Form elements global focus reset to soft primary ring */
+  input:focus, button:focus, textarea:focus, select:focus {
+    @apply outline-none ring-2 ring-primary-500/20 border-primary-500/50;
+  }
+}
+
+@layer components {
+  /* Premium SaaS Light Mode Components */
+  .premium-card {
+    @apply bg-surface border border-border shadow-card rounded-[14px];
+  }
+  
+  .glass-panel {
+    @apply bg-surface/80 backdrop-blur-xl border border-border/60 shadow-dropdown;
+  }
+
+  /* Micro-interactions */
+  .micro-hover {
+    @apply transition-all duration-200;
+  }
+  .micro-hover:hover {
+    @apply shadow-card-hover -translate-y-[1px];
+  }
+  
+  .active-indicator {
+    @apply bg-primary-50 text-primary-600 font-medium;
+  }
+  
+  .elegant-gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-text-primary to-text-secondary;
+  }
+  
+  /* Very subtle pulse for AI insights */
+  .ai-pulse {
+    box-shadow: 0 0 0 0 rgba(14, 165, 233, 0.4);
+    animation: pulse-soft 2s infinite cubic-bezier(0.66, 0, 0, 1);
+  }
+  
+  @keyframes pulse-soft {
+    to {
+      box-shadow: 0 0 0 6px rgba(14, 165, 233, 0);
+    }
+  }
+}

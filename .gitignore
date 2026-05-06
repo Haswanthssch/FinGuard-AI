@@ -1,0 +1,22 @@
+.kiro
+
+# Docs folder
+dev-tools
+
+# Frontend
+frontend/node_modules
+frontend/dist
+frontend/.env
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+venv/
