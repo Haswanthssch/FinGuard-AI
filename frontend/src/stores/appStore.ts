@@ -10,14 +10,9 @@ export interface Notification {
 
 interface AppState {
   // UI State
-  sidebarOpen: boolean;
-  theme: 'dark' | 'light';
   notifications: Notification[];
 
   // Actions
-  toggleSidebar: () => void;
-  setSidebarOpen: (open: boolean) => void;
-  setTheme: (theme: 'dark' | 'light') => void;
   addNotification: (notification: Omit<Notification, 'id'>) => void;
   removeNotification: (id: string) => void;
   clearNotifications: () => void;
@@ -25,21 +20,7 @@ interface AppState {
 
 export const useAppStore = create<AppState>()(
   devtools((set) => ({
-    sidebarOpen: true,
-    theme: 'dark',
     notifications: [],
-
-    toggleSidebar: () => {
-      set((state) => ({ sidebarOpen: !state.sidebarOpen }));
-    },
-
-    setSidebarOpen: (open: boolean) => {
-      set({ sidebarOpen: open });
-    },
-
-    setTheme: (theme: 'dark' | 'light') => {
-      set({ theme });
-    },
 
     addNotification: (notification: Omit<Notification, 'id'>) => {
       const id = Math.random().toString(36).substr(2, 9);

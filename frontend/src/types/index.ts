@@ -21,10 +21,13 @@ export interface Portfolio {
   name: string;
   description?: string;
   totalValue: number;
-  currency: string;
-  holdings: Holding[];
+  totalPnL: number;
+  totalPnLPercent: number;
+  holdingsCount: number;
+  riskProfile: string;
   createdAt: string;
   updatedAt: string;
+  holdings?: Holding[];
 }
 
 export interface Holding {
@@ -36,16 +39,7 @@ export interface Holding {
   allocation: number;
 }
 
-// Fraud types
-export interface FraudAlert {
-  id: string;
-  transactionId: string;
-  riskScore: number;
-  riskLevel: 'low' | 'medium' | 'high' | 'critical';
-  reason: string;
-  timestamp: string;
-  status: 'open' | 'investigating' | 'resolved' | 'false_positive';
-}
+
 
 // API Response types
 export interface ApiResponse<T> {

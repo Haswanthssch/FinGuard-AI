@@ -1,0 +1,4 @@
+from app.agents.prompts.registry import AGENT_PROMPTS, SYNTHESIS_PROMPT, ROUTER_PROMPT
+
+__all__ = ["AGENT_PROMPTS", "SYNTHESIS_PROMPT", "ROUTER_PROMPT"]
+

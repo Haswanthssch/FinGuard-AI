@@ -1,62 +1,58 @@
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Card';
-import { Button } from '@/components/atoms/Button';
+import { MissionControlHeader, AgentNavbar, ActiveAgentWorkspace, AgentChat } from '@/components/organisms';
+import { useAgentStore } from '@/stores/agentStore';
 
 export function ReportsPage() {
+  const activeAgent = useAgentStore((state) => state.activeAgent);
+
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900">Reports</h1>
-          <p className="text-gray-500 mt-2">Generate and manage compliance reports</p>
+    <div className="flex flex-col bg-[#FAFAFA] overflow-hidden select-none" style={{ height: 'calc(100vh - 105px)' }}>
+      {/* Mission Control Header */}
+      <MissionControlHeader />
+
+      {/* Agent Selection Navbar */}
+      <AgentNavbar />
+
+      {/* Main Content */}
+      <div className="flex-1 overflow-hidden flex">
+        {/* Center: Active Agent Workspace */}
+        <div className="flex-1 overflow-hidden flex flex-col bg-[#FAFAFA]">
+          <ActiveAgentWorkspace />
         </div>
-        <Button>+ Generate Report</Button>
-      </div>
 
-      {/* Report Templates */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {[
-          { name: 'Portfolio Summary', type: 'Monthly' },
-          { name: 'Risk Analysis', type: 'Quarterly' },
-          { name: 'Compliance Report', type: 'Annual' },
-          { name: 'Fraud Detection', type: 'Weekly' },
-          { name: 'Performance Analysis', type: 'Monthly' },
-          { name: 'Regulatory Filing', type: 'As Needed' },
-        ].map((report) => (
-          <Card key={report.name} className="cursor-pointer hover:border-blue-500 transition-colors">
-            <CardContent className="pt-6">
-              <p className="font-medium text-gray-900">{report.name}</p>
-              <p className="text-sm text-gray-500 mt-2">{report.type}</p>
-              <Button variant="secondary" size="sm" className="w-full mt-4">
-                Generate
-              </Button>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-
-      {/* Recent Reports */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Recent Reports</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-3">
-            {[
-              { name: 'Portfolio Summary - May 2024', date: '2024-05-31', status: 'Completed' },
-              { name: 'Risk Analysis - Q1 2024', date: '2024-04-15', status: 'Completed' },
-              { name: 'Compliance Report - 2023', date: '2024-01-15', status: 'Completed' },
-            ].map((report, idx) => (
-              <div key={idx} className="flex items-center justify-between p-4 bg-gray-50 border border-gray-100 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer">
-                <div>
-                  <p className="font-medium text-gray-900">{report.name}</p>
-                  <p className="text-sm text-gray-500">{report.date}</p>
+        {/* Right: Agent Sidebar */}
+        <div className="w-[340px] border-l border-gray-100 bg-white flex flex-col overflow-hidden shadow-[-10px_0_24px_rgba(17,24,39,0.03)]">
+          {activeAgent ? (
+            <>
+              {/* Sidebar Header */}
+              <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-3 bg-white">
+                <span className="text-xl">
+                  {activeAgent === 'portfolio' && '🧠'}
+                  {activeAgent === 'risk' && '⚠️'}
+                  {activeAgent === 'compliance' && '🏛'}
+                  {activeAgent === 'performance' && '📈'}
+                </span>
+                <div className="flex flex-col">
+                  <span className="text-sm font-bold text-gray-900 capitalize">
+                    {activeAgent} Intelligence
+                  </span>
+                  <span className="text-[10px] text-gray-400 uppercase tracking-wider font-bold">
+                    Live Chat Session
+                  </span>
                 </div>
-                <span className="text-green-400 text-sm">{report.status}</span>
               </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+              
+              {/* Chat Session */}
+              <div className="flex-1 overflow-hidden">
+                <AgentChat agentId={activeAgent} />
+              </div>
+            </>
+          ) : (
+            <div className="flex-1 flex items-center justify-center p-8 text-center text-gray-400 text-sm bg-white">
+              Select an agent to start a conversation
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

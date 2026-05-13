@@ -22,26 +22,26 @@ export function Input({
   return (
     <div className="w-full">
       {label && (
-        <label className="block text-body font-medium text-gray-900 mb-sm">
+        <label className="block text-sm font-medium text-gray-900 mb-2">
           {label}
-          {props.required && <span className="text-red-500 ml-xs">*</span>}
+          {props.required && <span className="text-red-500 ml-1">*</span>}
         </label>
       )}
 
       <div className="relative">
         {icon && iconPosition === 'left' && (
-          <div className="absolute left-lg top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
+          <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none flex items-center justify-center">
             {icon}
           </div>
         )}
 
         <input
           className={cn(
-            'w-full px-lg py-md border rounded-md text-body transition-all duration-200',
+            'w-full px-4 py-2.5 border rounded-md text-sm transition-all duration-200',
             'placeholder-gray-400 text-gray-900',
             'focus:outline-none focus:ring-4 focus:ring-blue-100 focus:border-blue-500',
-            icon && iconPosition === 'left' && 'pl-2xl',
-            icon && iconPosition === 'right' && 'pr-2xl',
+            icon && iconPosition === 'left' && 'pl-10',
+            icon && iconPosition === 'right' && 'pr-10',
             error
               ? 'border-red-500 bg-red-50 focus:ring-red-100 focus:border-red-500'
               : 'border-gray-200 bg-white hover:border-gray-300',
@@ -53,18 +53,22 @@ export function Input({
         />
 
         {icon && iconPosition === 'right' && (
-          <div className="absolute right-lg top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
+          <div className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none flex items-center justify-center">
             {icon}
           </div>
         )}
       </div>
 
       {error && (
-        <p className="text-caption text-red-600 mt-sm">{error}</p>
+        <p className="text-xs text-red-600 mt-1">
+          {typeof error === 'string'
+            ? error
+            : (error as any)?.message || 'Invalid input'}
+        </p>
       )}
 
       {helperText && !error && (
-        <p className="text-caption text-gray-500 mt-sm">{helperText}</p>
+        <p className="text-xs text-gray-500 mt-1">{helperText}</p>
       )}
     </div>
   );

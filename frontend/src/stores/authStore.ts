@@ -1,45 +1,12 @@
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 import { User } from '@/types';
-import { apiClient } from '@/api/client';
-
-// Demo credentials for development
-const DEMO_USERS: Record<string, { password: string; user: User }> = {
-  'demo@finguard.ai': {
-    password: 'Demo@123456',
-    user: {
-      id: '1',
-      email: 'demo@finguard.ai',
-      name: 'Demo Admin',
-      roles: ['admin'],
-      createdAt: new Date().toISOString(),
-    },
-  },
-  'analyst@finguard.ai': {
-    password: 'Analyst@123456',
-    user: {
-      id: '2',
-      email: 'analyst@finguard.ai',
-      name: 'Analyst User',
-      roles: ['analyst'],
-      createdAt: new Date().toISOString(),
-    },
-  },
-  'user@finguard.ai': {
-    password: 'User@123456',
-    user: {
-      id: '3',
-      email: 'user@finguard.ai',
-      name: 'Regular User',
-      roles: ['user'],
-      createdAt: new Date().toISOString(),
-    },
-  },
-};
+import { authService, parseApiError } from '@/services/authService';
 
 interface AuthState {
   user: User | null;
   token: string | null;
+  refreshToken: string | null;
   isAuthenticated: boolean;
   isLoading: boolean;
   error: string | null;
@@ -47,7 +14,7 @@ interface AuthState {
   // Actions
   login: (email: string, password: string) => Promise<void>;
   signup: (email: string, password: string, name: string) => Promise<void>;
-  logout: () => void;
+  logout: () => Promise<void>;
   setUser: (user: User) => void;
   clearError: () => void;
 }
@@ -55,9 +22,10 @@ interface AuthState {
 export const useAuthStore = create<AuthState>()(
   devtools(
     persist(
-      (set) => ({
+      (set, get) => ({
         user: null,
         token: null,
+        refreshToken: null,
         isAuthenticated: false,
         isLoading: false,
         error: null,
@@ -65,82 +33,92 @@ export const useAuthStore = create<AuthState>()(
         login: async (email: string, password: string) => {
           set({ isLoading: true, error: null });
           try {
-            // Check demo credentials first (for development)
-            const demoUser = DEMO_USERS[email];
-            if (demoUser && demoUser.password === password) {
-              // Generate a mock JWT token for demo
-              const mockToken = `demo_token_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-              set({
-                user: demoUser.user,
-                token: mockToken,
-                isAuthenticated: true,
-                isLoading: false,
-              });
-              return;
-            }
+            const response = await authService.login({ email, password });
+            
+            // Map backend user to frontend User type
+            const user: User = {
+              id: response.user_id,
+              email: response.email,
+              name: response.full_name,
+              roles: ['user'], // Default role
+              createdAt: new Date().toISOString(), // Backend doesn't return created_at
+            };
 
-            // Try real backend API
-            const response = await apiClient.post('/api/v1/auth/login', {
-              email,
-              password,
-            });
-            const data = response.data as { data: { user: User; token: string } };
-            const { user, token } = data.data;
             set({
               user,
-              token,
+              token: response.access_token,
+              refreshToken: response.refresh_token || null,
               isAuthenticated: true,
               isLoading: false,
+              error: null,
             });
-          } catch (error) {
-            const err = error as { response?: { data?: { error?: { message?: string } } } };
-            const message = err.response?.data?.error?.message || 'Invalid email or password';
+          } catch (error: any) {
+            console.log("LOGIN ERROR:", error);
+            console.log("FULL ERROR RESPONSE:", JSON.stringify(error.response?.data, null, 2));
+            const message = parseApiError(error);
             set({
               error: message,
               isLoading: false,
+              isAuthenticated: false,
             });
             throw error;
           }
         },
 
-        signup: async (email: string, _password: string, name: string) => {
+        signup: async (email: string, password: string, name: string) => {
           set({ isLoading: true, error: null });
           try {
-            // For demo, allow signup with any credentials
-            // In production, this would call the real backend
-            const mockToken = `demo_token_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-            const newUser: User = {
-              id: `user_${Date.now()}`,
+            const response = await authService.register({
               email,
-              name,
+              password,
+              full_name: name,
+            });
+
+            // Map backend user to frontend User type
+            const user: User = {
+              id: response.user_id,
+              email: response.email,
+              name: response.full_name,
               roles: ['user'],
               createdAt: new Date().toISOString(),
             };
 
             set({
-              user: newUser,
-              token: mockToken,
+              user,
+              token: response.access_token,
+              refreshToken: response.refresh_token || null,
               isAuthenticated: true,
               isLoading: false,
+              error: null,
             });
-          } catch (error) {
-            const err = error as { response?: { data?: { error?: { message?: string } } } };
-            const message = err.response?.data?.error?.message || 'Signup failed';
+          } catch (error: any) {
+            console.log("SIGNUP ERROR:", error);
+            console.log("FULL ERROR RESPONSE:", JSON.stringify(error.response?.data, null, 2));
+            const message = parseApiError(error);
             set({
               error: message,
               isLoading: false,
+              isAuthenticated: false,
             });
             throw error;
           }
         },
 
-        logout: () => {
-          set({
-            user: null,
-            token: null,
-            isAuthenticated: false,
-            error: null,
-          });
+        logout: async () => {
+          try {
+            await authService.logout();
+          } catch (error) {
+            // Ignore logout errors
+            console.error('Logout error:', error);
+          } finally {
+            set({
+              user: null,
+              token: null,
+              refreshToken: null,
+              isAuthenticated: false,
+              error: null,
+            });
+          }
         },
 
         setUser: (user: User) => {
@@ -156,6 +134,7 @@ export const useAuthStore = create<AuthState>()(
         partialize: (state) => ({
           user: state.user,
           token: state.token,
+          refreshToken: state.refreshToken,
           isAuthenticated: state.isAuthenticated,
         }),
       }

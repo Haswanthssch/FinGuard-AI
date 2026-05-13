@@ -5,9 +5,13 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    @apply bg-background text-text-primary font-sans antialiased overflow-x-hidden;
-    background-color: theme('colors.background');
+    @apply bg-[#FAFAFA] text-gray-900 font-sans antialiased overflow-x-hidden;
+    font-family: 'Inter', sans-serif;
   }
   
   ::selection {
@@ -68,5 +72,15 @@
     to {
       box-shadow: 0 0 0 6px rgba(14, 165, 233, 0);
     }
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }

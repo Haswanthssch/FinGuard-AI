@@ -1,0 +1,62 @@
+[
+  {
+    "document_id": "sebi-investment-advisers-2013",
+    "title": "SEBI Investment Advisers Regulations, 2013",
+    "regulator": "SEBI",
+    "category": "investment_advisers",
+    "published_date": "2013-01-21",
+    "source_url": "https://www.sebi.gov.in/legal/regulations/jan-2013/sebi-investment-advisors-regulations-2013_26872.html",
+    "document_type": "regulation",
+    "content": "SEBI Investment Advisers Regulations, 2013 govern persons who provide investment advice in India. A person should not act as an investment adviser or hold itself out as an investment adviser unless registered with SEBI or specifically exempt. The framework covers registration, qualification and certification requirements, capital adequacy, client risk profiling, suitability, disclosure of conflicts, segregation of advisory and distribution activities, record maintenance, compliance responsibilities, and investor grievance handling. Investment advice should be suitable to the client's risk profile, investment objectives, financial situation, and needs. Advisers should maintain records of client assessments, advice, rationale, disclosures, agreements, and related communications. Regulatory answers should be checked against the latest amended SEBI text and official circulars."
+  },
+  {
+    "document_id": "sebi-investor-adviser-overview",
+    "title": "SEBI Investor Awareness: Understanding Investment Advisors",
+    "regulator": "SEBI",
+    "category": "investor_protection",
+    "published_date": null,
+    "source_url": "https://investor.sebi.gov.in/investment_advisor.html",
+    "document_type": "investor_guidance",
+    "content": "SEBI investor guidance explains that Investment Advisors provide personalised financial guidance based on client goals, risk appetite, and market conditions. Investors should verify whether an adviser is registered with SEBI, understand the fee model, confirm disclosures, and use official grievance redressal channels when needed. Investment advisers differ from distributors because advisers are expected to provide advice in the client's interest and manage conflicts. This guidance supports investor protection responses, especially questions about adviser selection, red flags, grievance mechanisms, and the importance of documented risk profiling and suitability."
+  },
+  {
+    "document_id": "rbi-kyc-master-direction-2016",
+    "title": "RBI Master Direction - Know Your Customer Direction, 2016",
+    "regulator": "RBI",
+    "category": "kyc_aml",
+    "published_date": "2016-02-25",
+    "source_url": "https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx?id=11566",
+    "document_type": "master_direction",
+    "content": "RBI Master Direction - Know Your Customer Direction, 2016 sets expectations for regulated entities on customer acceptance policy, customer identification procedures, customer due diligence, risk management, ongoing monitoring, record management, and reporting obligations under AML/CFT rules. KYC is used to identify and verify customers, understand the nature of business and financial status, and reduce misuse for money laundering, terrorist financing, or proliferation financing. Regulated entities should classify customers by risk, perform CDD at onboarding and specified trigger events, maintain records, monitor transactions, and comply with PMLA-related obligations. Officially Valid Documents and CKYC identifiers are part of the framework. Always check the latest updated RBI Master Direction."
+  },
+  {
+    "document_id": "rbi-kyc-faq-2025",
+    "title": "RBI FAQs on Master Direction on KYC",
+    "regulator": "RBI",
+    "category": "kyc_aml",
+    "published_date": "2025-06-09",
+    "source_url": "https://www.rbi.org.in/scripts/faqview.aspx/upload/Scripts/FAQView.aspx?Id=173",
+    "document_type": "faq",
+    "content": "RBI FAQs describe KYC as a process by which a regulated entity obtains information on a customer's identity and address, nature of business, and financial status, and verifies that information. KYC is mandatory at the start of account-based relationships and for specified occasional transactions. The FAQs clarify operational questions on customer due diligence, periodic updation, officially valid documents, risk categorisation, CKYC, and situations requiring fresh or updated KYC. Answers should be grounded in the Master Direction and current RBI FAQs."
+  },
+  {
+    "document_id": "rbi-digital-lending-guidelines-2022",
+    "title": "RBI Guidelines on Digital Lending",
+    "regulator": "RBI",
+    "category": "digital_lending",
+    "published_date": "2022-09-02",
+    "source_url": "https://www.rbi.org.in/scripts/bs_circularindexdisplay.aspx/BS_CircularIndexDisplay.aspx?Id=12382",
+    "document_type": "circular",
+    "content": "RBI Guidelines on Digital Lending apply to digital lending by commercial banks, cooperative banks, and NBFCs including housing finance companies. The guidelines define digital lending as remote and automated lending largely using digital technologies for customer acquisition, credit assessment, approval, disbursement, recovery, and service. Key requirements include direct flow of funds between borrower and regulated entity without pass-through accounts of lending service providers, fees payable to lending service providers to be paid by the regulated entity and not the borrower, key fact statement with annual percentage rate before loan execution, cooling-off period, grievance redressal officers, need-based data collection with explicit consent, and credit bureau reporting. The 2022 circular notes it was repealed and refers readers to RBI Digital Lending Directions, 2025, so current answers must verify the latest RBI direction."
+  },
+  {
+    "document_id": "rbi-digital-lending-faq",
+    "title": "RBI FAQs on Digital Lending Guidelines",
+    "regulator": "RBI",
+    "category": "digital_lending",
+    "published_date": "2023-02-14",
+    "source_url": "https://www.rbi.org.in/Commonman/English/Scripts/FAQs.aspx?Id=3413",
+    "document_type": "faq",
+    "content": "RBI FAQs on Digital Lending clarify the scope of digital lending, lending service provider responsibilities, grievance redressal officers, APR disclosure, treatment of insurance charges, fund flow restrictions, payment aggregator involvement, recovery practices, and disclosure of contingent charges. They reinforce that regulated entities remain responsible for compliance even when outsourcing to lending service providers or digital lending apps. The FAQs are useful for questions about borrower protection, key fact statements, customer consent, fund flow, and complaint handling."
+  }
+]

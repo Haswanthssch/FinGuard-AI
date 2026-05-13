@@ -1,0 +1,41 @@
+# Core
+fastapi==0.115.12
+uvicorn[standard]==0.34.3
+python-multipart==0.0.20
+pydantic==2.11.4
+pydantic-settings==2.9.1
+
+# Data
+pandas==2.2.2
+numpy==1.26.4
+openpyxl==3.1.5
+pyarrow==20.0.0
+joblib==1.5.0
+
+# Market Data
+yfinance==1.3.0
+mftool==3.3
+requests==2.32.3
+
+# ML
+scikit-learn==1.8.0
+xgboost==3.2.0
+scipy==1.15.3
+statsmodels==0.14.4
+umap-learn==0.5.12
+
+# NLP/Fuzzy
+rapidfuzz==3.14.5
+
+# Database
+sqlalchemy==2.0.41
+alembic==1.15.2
+psycopg2-binary==2.9.12
+
+# Cache / Async
+redis==5.2.1
+celery==5.5.2
+
+# Utilities
+python-dotenv==1.1.0
+httpx==0.28.1
