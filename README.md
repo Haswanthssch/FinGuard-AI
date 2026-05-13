@@ -14,22 +14,8 @@ Our mission is to democratize high-end financial engineering. By combining **Lar
 
 ---
 
-## 🖥️ Dashboard Showcase
-
-### **Mission Control**
-The FinGuard AI dashboard provides a premium, high-density view of your financial ecosystem, combining market pulses with real-time portfolio tracking.
-
-![Main Dashboard](docs/images/dashboard_main.png)
-
-### **Real-Time Intelligence**
-Dynamic KPI tracking and risk assessment powered by our multi-agent backend orchestration.
-
-![KPI Analytics](docs/images/dashboard_kpis.png)
-
----
 
 ## 🚀 Core Features
-
 
 ### 🤖 Multi-Agent Orchestration
 Powered by **LangGraph** and **Groq (Llama 3.3)**, the system coordinates specialized agents:
